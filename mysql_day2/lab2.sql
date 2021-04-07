@@ -40,8 +40,8 @@ end as day_type
 from rental;
 
 # How many rentals were made in the last month of renting activity?
-select month(max(rental_date)) from rental;
+select year(max(rental_date)), month(max(rental_date)) from rental;
 select
 COUNT(RENTAL_ID)
 from rental
-WHERE MONTH(rental_date)=2
+WHERE MONTH(rental_date) =2 AND YEAR(rental_date) =2006
