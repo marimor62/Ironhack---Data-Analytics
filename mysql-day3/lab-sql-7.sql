@@ -1,3 +1,4 @@
+use sakila;
 #In the actor table, which are the actors whose last names are not repeated?
 select first_name, last_name from actor
 group by first_name, last_name
@@ -29,3 +30,12 @@ group by rating;
 select rating, round(avg(length)) as average_length from film
 group by rating
 having avg(length) >= 120;
+
+#What are the most rented films?
+SELECT title, count(film_id) as film_count, store_id, length, rating, release_year, c.name as category  FROM film
+	INNER JOIN film_category using (film_id)
+    INNER JOIN category c using (category_id)
+    INNER JOIN inventory using(film_id) 
+    INNER JOIN rental using(inventory_id)
+group by film_id
+order by film_count desc;
